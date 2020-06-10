@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<label>Paste Your CSV Below</label>
+<form id="csvForm" method="POST" action="/">
+  <textarea rows="60" cols="100">Paste Here</textarea>
+  <input type="submit" onclick="func()" value="Submit">
+</form>
+
+<script>
+  function func() {
+    document.getElementById("csvForm").submit();
+  }
+  </script>
+
+  </body>
+  </html>
+
+<!-- - Initially, submission of the JSON data (from the client to server) should be done
+using an HTML form with a single textarea input field (for the entire JSON text) and
+a submit button. When the user clicks submit, POST the form data to the server. The
+form submission process should use the default browser action/behavior. DO NOT use
+jQuery/AJAX functions in the submission process. -->

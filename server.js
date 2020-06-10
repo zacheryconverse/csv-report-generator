@@ -1,17 +1,32 @@
-// const express = require('express');
-// const app = express();
-// const port = 3000
+const express = require('express');
+const app = express();
+const bp = require('body-parser');
+const port = 3000
 
-// app.get('/', (req, res) => res.send('Hello World'));
+app.get('/', (req, res) => res.sendFile('/Users/zacheryconverse/repos/csv-report-generator/client/index.html'));
 
-// app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
+// when the user clicks submit, POST data from form to server
+app.post('/', (req, res) => {
+  // console.log(req.body);
+  res.send('data added to server');
+})
+
+// write a function that transforms input from json to csv - include this function in res.send
+const convertToCsv = json => {
+  // write internal recursive function
+}
+
+// app.use(express.static('client')); // ??
+
+app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
 
 /*
 - Build your Express app inside server.js
 - Use Express to serve up an index.html file and its associated assets
 - Implement all the report generation logic on the server. Do not use
 any external libraries (such as via npm). You may use jQuery on the client.
-- The response from the server should contain the CSV report along with the
+
+- *** The response from the server should contain the CSV report along with the
 form so the user can keep submitting indefinitely, without having to go back
 to the "form page". DO NOT USE jQuery/AJAX. You may use the supplied examples
 of JSON and CSV for testing and verification.
