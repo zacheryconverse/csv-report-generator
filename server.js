@@ -1,22 +1,39 @@
 const express = require('express');
 const app = express();
 const bp = require('body-parser');
-const port = 3000
+const port = 3001
 
 app.get('/', (req, res) => res.sendFile('/Users/zacheryconverse/repos/csv-report-generator/client/index.html'));
 
 // when the user clicks submit, POST data from form to server
 app.post('/', (req, res) => {
-  // console.log(req.body);
-  res.send('data added to server');
+  console.log(req.body);
+  // res.send('data added to server');
+  res.send(convertToCSV(req.body))
 })
 
 // write a function that transforms input from json to csv - include this function in res.send
-const convertToCsv = json => {
-  // write internal recursive function
+const convertToCSV = objArray => {
+  // write  recursive function
+  var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+  var str = '';
+
+  for (var i = 0; i < array.length; i++) {
+      var line = '';
+      for (var index in array[i]) {
+          if (line != '') line += ','
+
+          line += array[i][index];
+      }
+      str += line + '\n';
+  }
+
+  return str;
 }
 
-// app.use(express.static('client')); // ??
+// dynamically insert the result of the data processing step into the HTML of the res
+// before or as a part of res.end()
+app.use(express.static('client'));
 
 app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
 
